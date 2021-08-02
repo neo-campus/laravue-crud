@@ -46,8 +46,10 @@ export default {
         
     },
     created(){
-        let url = `http://127.0.0.1:8000/api/posts`;
-        this.axios.get(url).then(response => {
+        let baseURL = window.axios.defaults.baseURL;
+        let uri = baseURL+'/api/posts';
+        
+        this.axios.get(uri).then(response => {
                 this.posts = response.data.data;
         });
         

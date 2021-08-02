@@ -19,9 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('posts',[PostsController::class,'index'])->name('index');
-Route::post('posts/store', [PostsController::class,'store'])->name('store');
-Route::get('posts/show/{id}', [PostsController::class,'show'])->name('show');
-Route::post('posts/update', [PostsController::class,'update'])->name('update');
-Route::delete('posts/destroy/{id}', [PostsController::class,'destroy'])->name('destroy');
+Route::group([
+    'prefix' => 'posts',
+    'as'     => 'posts.',
+], function(){
+    Route::get('/',[PostsController::class,'index'])->name('index');
+    Route::post('/store', [PostsController::class,'store'])->name('store');
+    Route::get('/show/{id}', [PostsController::class,'show'])->name('show');
+    Route::post('/update', [PostsController::class,'update'])->name('update');
+    Route::delete('/destroy/{id}', [PostsController::class,'destroy'])->name('destroy');
+});
+
 

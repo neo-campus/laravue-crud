@@ -8,6 +8,8 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import {routes} from './routes';
 
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20,6 +22,8 @@ import {routes} from './routes';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
+
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -44,3 +48,6 @@ const app = new Vue({
 // const app = new Vue({
 //     el: '#app',
 // });
+
+// window.axios.defaults.baseURL = document.head.querySelector('meta[name="api-base-url"]').content;
+// console.log(window.axios.defaults.baseURL);

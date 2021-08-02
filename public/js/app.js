@@ -1881,7 +1881,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      post: {},
+      validation: []
+    };
+  },
+  methods: {
+    PostStore: function PostStore() {
+      var _this = this;
+
+      var baseURL = window.axios.defaults.baseURL;
+      var uri = baseURL + '/api/posts/store';
+      this.axios.post(uri, this.post).then(function (response) {
+        _this.$router.push({
+          name: 'posts'
+        });
+      })["catch"](function (error) {
+        _this.validation = error.response.data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -1944,8 +2006,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var url = "http://127.0.0.1:8000/api/posts";
-    this.axios.get(url).then(function (response) {
+    var baseURL = window.axios.defaults.baseURL;
+    var uri = baseURL + '/api/posts';
+    this.axios.get(uri).then(function (response) {
       _this.posts = response.data.data;
     });
   }
@@ -2011,6 +2074,8 @@ var app = new (vue_dist_vue__WEBPACK_IMPORTED_MODULE_4___default())({
 // const app = new Vue({
 //     el: '#app',
 // });
+// window.axios.defaults.baseURL = document.head.querySelector('meta[name="api-base-url"]').content;
+// console.log(window.axios.defaults.baseURL);
 
 /***/ }),
 
@@ -2042,6 +2107,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = document.head.querySelector('meta[name="api-base-url"]').content;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -37822,9 +37888,143 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card card-default" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("TAMBAH POST")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.PostStore.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("TITLE")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.title,
+                        expression: "post.title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Masukan Title" },
+                    domProps: { value: _vm.post.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.post, "title", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.validation.title
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-danger mt-1",
+                            attrs: { role: "alert" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.validation.title[0]) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("KONTEN")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.content,
+                        expression: "post.content"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "5", placeholder: "Masukkan Konten" },
+                    domProps: { value: _vm.post.content },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.post, "content", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.validation.content
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-danger mt-1",
+                            attrs: { role: "alert" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.validation.content[0]) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-md btn-danger", attrs: { type: "reset" } },
+        [_vm._v("RESET")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-md btn-success", attrs: { type: "submit" } },
+        [_vm._v("SIMPAN")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
