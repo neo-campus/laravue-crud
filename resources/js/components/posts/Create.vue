@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-default">
-                    <div class="card-header">TAMBAH POST</div>
+                    <div class="card-header">TAMBAH POST   <router-link :to="{ name: 'posts' }" class="btn btn-md btn-success">Back</router-link></div>
                      <div class="card-body">
                          <form @submit.prevent="PostStore">
 

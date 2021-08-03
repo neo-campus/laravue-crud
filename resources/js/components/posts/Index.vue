@@ -23,7 +23,7 @@
                                         <td>{{ post.content }}</td>
                                         <td class="text-center">
                                             <router-link :to="{name: 'edit', params: { id: post.id }}" class="btn btn-sm btn-primary">EDIT</router-link>
-                                            <button @click.prevent="PostDelete(post.id, index)" class="btn btn-sm btn-danger">HAPUS</button>
+                                            <button @click.prevent="PostDelete(post.id)" class="btn btn-sm btn-danger">HAPUS</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -47,12 +47,25 @@ export default {
     },
     created(){
         let baseURL = window.axios.defaults.baseURL;
-        let uri = baseURL+'/api/posts';
+        let uri     = baseURL+'/api/posts';
         
         this.axios.get(uri).then(response => {
                 this.posts = response.data.data;
-        });
-        
+        });  
+    },
+    methods: {
+        PostDelete(id){
+            let baseURL2 = window.axios.defaults.baseURL;
+            let uri2     = baseURL2+`/api/posts/destroy/${id}`;
+            this.axios.delete(uri2)
+            .then(response => {
+                let i = this.posts.map(data => data.id).indexOf(id);
+                let t = this.posts.splice(i,1);
+                 console.log(t);
+            }).catch(error => {
+                alert('system error!');
+            });
+        }
     }
 }
 </script>
