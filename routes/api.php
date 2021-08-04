@@ -28,6 +28,7 @@ Route::group([
     Route::get('/show/{id}', [PostsController::class,'show'])->name('show');
     Route::post('/update/{id?}', [PostsController::class,'update'])->name('update');
     Route::delete('/destroy/{id}', [PostsController::class,'destroy'])->name('destroy');
+    Route::get('total-post', [PostsController::class, 'totalPost'])->name('total-post');
 });
 
 

@@ -17,6 +17,15 @@ class PostsController extends Controller
         ], 200);
     }
 
+    public function totalPost(){
+        $post = Post::get()->count();
+        return response()->json([
+            'succes'  => true,
+            'message' => 'List Semua Posts',
+            'data'    => $post
+        ], 200);
+    }
+
     public function store(Request $request){
         //validate data
         $validator = Validator::make($request->all(), [

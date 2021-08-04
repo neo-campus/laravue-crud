@@ -51,7 +51,6 @@ export default {
     },
     methods:{
         PostStore(){
-             let baseURL = window.axios.defaults.baseURL;
              let uri = baseURL+'/api/posts/store';
              this.axios.post(uri, this.post)
                 .then((response) => {

@@ -1,7 +1,7 @@
 <template>
-    <div class="container mt-3">
+    <div class="container-fluid mt-5">
          <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="card card-default">
                     <div class="card-header">POSTS</div>
 
@@ -33,39 +33,48 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-2">
+               <coba :total="countPost"></coba>
+            </div>
         </div>
     </div>
-    
+
 </template>
 <script>
-export default {
-    data() {
-        return {
-            posts: []
-        }
-        
-    },
-    created(){
-        let baseURL = window.axios.defaults.baseURL;
-        let uri     = baseURL+'/api/posts';
-        
-        this.axios.get(uri).then(response => {
-                this.posts = response.data.data;
-        });  
-    },
-    methods: {
-        PostDelete(id){
-            let baseURL2 = window.axios.defaults.baseURL;
-            let uri2     = baseURL2+`/api/posts/destroy/${id}`;
-            this.axios.delete(uri2)
-            .then(response => {
-                let i = this.posts.map(data => data.id).indexOf(id);
-                let t = this.posts.splice(i,1);
-                 console.log(t);
-            }).catch(error => {
-                alert('system error!');
+import Coba from './Coba.vue';
+    export default {
+        components: { Coba },
+        data() {
+            return {
+                posts: [],
+                countPost: 0
+            }
+        },
+        created(){
+            let uri     = baseURL+'/api/posts';
+            this.axios.get(uri).then(response => {
+                    this.posts = response.data.data;
             });
+            this.totalPost();
+        },
+        methods: {
+            PostDelete(id){
+                let uri     = baseURL+`/api/posts/destroy/${id}`;
+                this.axios.delete(uri)
+                .then(response => {
+                    let i = this.posts.map(data => data.id).indexOf(id);
+                    let t = this.posts.splice(i,1);
+                    this.totalPost();
+                }).catch(error => {
+                    alert('system error!');
+                });
+            },
+            totalPost(){
+                let uri = baseURL+`/api/posts/total-post`;
+                this.axios.get(uri).then(response => {
+                    this.countPost = response.data.data;
+                });
+            }
         }
     }
-}
 </script>

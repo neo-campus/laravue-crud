@@ -46,7 +46,6 @@
             }
         },
         created() {
-            let baseURL = window.axios.defaults.baseURL;
             let uri     = baseURL+`/api/posts/show/${this.$route.params.id}`;
             this.axios.get(uri).then((response) => {
                 this.post = response.data.data;
@@ -55,9 +54,8 @@
         },
         methods: {
             PostUpdate() {
-                let baseURL2 = window.axios.defaults.baseURL;
-                let url     = baseURL2+`/api/posts/update/${this.$route.params.id}`;
-                this.axios.post(url, this.post)
+                let uri     = baseURL+`/api/posts/update/${this.$route.params.id}`;
+                this.axios.post(uri, this.post)
                     .then((response) => {
                         this.$router.push({
                             name: 'posts'
